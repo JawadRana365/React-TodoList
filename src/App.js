@@ -1,23 +1,20 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import todos from "./data/todoList"
+import TodoContainer from './components/TodoContainer/TodoContainer';
+
+export const todoContext = React.createContext()
 
 function App() {
+  const[todoList,setTodoList] = useState(todos.todos)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <todoContext.Provider value={{todoList,setTodoList}}>
+        <header className="App-header py-8">
+          <TodoContainer/>
+        </header>
+      </todoContext.Provider>
     </div>
   );
 }
